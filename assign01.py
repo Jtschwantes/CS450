@@ -10,17 +10,30 @@ import numpy as np
 iris = datasets.load_iris()
 
 # My classifier class
-class MyClassifier:
+class kNN:
     def __init__(self):
         self.xTrain = []
         self.yTrain = []
+    # Fit doesn't really do much
     def fit(self, xTrain, yTrain):
         self.xTrain = xTrain
         self.yTrain = yTrain
-    def predict(self, xTest):
-        yTest = np.zeros(len(xTest), dtype=int)
-        for i in range(len(xTest)):
-            yTest[i] = 0
+    # Finds the K nearest neighbors
+    def predict(self, xTest, k):
+        yTest = [] # Results array
+        for test in xTest: # Loop through each test point
+            results = [] # Temporary array to store yTrain results
+            # First, calculate distances to training points
+            step = list(map(lambda x:(x - test)**2, self.xTrain))
+            # Then, sum them into one value for each element
+            step2 = list(map(np.sum, step))
+            # Grab the indexes of the smallest distances
+            indexes = np.argsort(step2)
+            # Grab the smallest k distances
+            for j in range(k):
+                results.append(self.yTrain[indexes[j]])
+            # Classify by getting the mode
+            yTest.append(stats.mode(results))
         return yTest
 
 # Function to get accuracy
