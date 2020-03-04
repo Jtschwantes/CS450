@@ -23,15 +23,15 @@ class NeuralNet:
         self.weights = np.array([[[-1, -0.5, 0.5, 1, 0.5], [-1, -0.5, 0.5, 1, 0.5], [-1, -0.5, 0.5, 1, 0.5], [-1, -0.5, 0.5, 1, 0.5]],
                                  [[-1, -0.5, 0.5, 1, 0.5], [-1, -0.5, 0.5, 1, 0.5], [-1, -0.5, 0.5, 1, 0.5], [-1, -0.5, 0.5, 1, 0.5]],
                                  [[-1, -0.5, 0.5, 1, 0.5], [-1, -0.5, 0.5, 1, 0.5], [-1, -0.5, 0.5, 1, 0.5], [-1, -0.5, 0.5, 1, 0.5]]])
-    # This function applies the sigmond activation function to an array of nodes
-    def sigmify(self, array):
-        return np.array(list(map(lambda x: 1 / (1 + math.pow(math.e, -1 * x)), array)))
     # Just a little randomization function to set the weights, for now goes between -3.0 to 3.0
     def randomizeWeights(self, size):
         array = []
         for x in range(size):
             array.append((random.random() - 0.5) * 6)
         return np.array(array)
+    # This function applies the sigmond activation function to an array of nodes
+    def sigmify(self, array):
+        return np.array(list(map(lambda x: 1 / (1 + math.pow(math.e, -1 * x)), array)))
     # The classification algorithm
     def classify(self, array):
         # Take in the data as an array
