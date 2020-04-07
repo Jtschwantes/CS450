@@ -117,6 +117,8 @@ class NeuralNet:
                     self.weights[index][idx][i + 1] = (self.weights[index][idx][i + 1] - 
                         ((self.learnRate * errors[index][i]) * self.nodes[index][i]))
 
+
+############# EXECUTION #################
 nn = NeuralNet(4, 4, 2)
 print(nn.classify([1.4, 2.3, 5.0, 3.8]))
 nn.learn(nn.errorize(1))
